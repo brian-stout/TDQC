@@ -16,7 +16,7 @@ def comparenumbers(guess, randomNumber):
     elif guess > randomNumber:
         print(guess, "is too high - please guess again", end="")
         return True
-    elif guess < randomNumber:
+    else:
         print(guess, "is too low  - please guess again", end="")
         return True
 
@@ -35,7 +35,7 @@ def comparenumberslie(guess, randomNumber):
         print(guess, "is too low  - please guess again" , end="")
         string = "I lied about " + str(guess) + " being too low"
         return [True, string]
-    elif guess < randomNumber:
+    else:
         print(guess, "is too high - please guess again", end="")
         string = "I lied about " + str(guess) + " being too high"
         return [True, string]
@@ -72,22 +72,21 @@ def main():
             #Gives a valid way for user to exit program
             if guess == "end":
                 exit()
-
+            #Checks for empty value
             if guess == "":
                 guess = "Not entering a value"  #Corrects returned error
                 raise ValueError
-
             #Raises an error if value has a leading 0 or decimal
             if guess != str(int(guess)):
                 raise ValueError
+            #Checks for value outside of range
             guess = int(guess)
-
             if (guess < 1) or (guess > 100):
                 raise ValueError
 
             guessAttempts += 1
             #Determines if program should lie based on percent
-            if (shouldlie(.3) and haveLied == False):
+            if (shouldlie(.25) and haveLied == False):
                 continueLoop, whenILied = comparenumberslie(guess, randomNumber)
                 haveLied = True
             else:
